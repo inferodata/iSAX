@@ -1,0 +1,26 @@
+export(iSA) # main iSA algorithm
+export(prep.data) ## prepares data to run iSA
+
+importFrom(tm, stripWhitespace)
+importFrom(tm, removeNumbers)
+importFrom(tm, removePunctuation)
+importFrom(tm, removeWords)
+importFrom(tm, stopwords)
+importFrom(tm, PlainTextDocument)
+importFrom(tm, removeSparseTerms)
+importFrom(tm, DocumentTermMatrix)
+importFrom(tm, stemDocument)
+
+importFrom(tm, tm_map)
+importFrom(tm, VectorSource)
+importFrom(tm, VCorpus)
+importFrom(parallel, detectCores)
+importFrom(quadprog, solve.QP)
+importFrom(data.table, data.table)
+importFrom(BMS, bin2hex)
+importFrom(entropy, entropy)
+
+#importFrom(RMeCab, RMeCabC)
+#importFrom(rmmseg4j, mmseg4j)
+
+import(rJava)
