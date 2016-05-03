@@ -4,7 +4,7 @@ iSAX is an R package which provides access to iSA technology developed by VOICES
 ## Warning:
 Commercial use of iSA is protected under the U.S. provisional patent application No. 62/215264
 
-## To install the package
+## Getting the R package
 - Make sure to start a fresh R session an type:
   - `library(devtools)`
   - `install_github("blogsvoices/iSAX")`
