@@ -11,6 +11,5 @@ Commercial use of iSA is protected under the U.S. provisional patent application
 - At this point you should have `iSAX` installed and can proceed:
   - `library(iSAX)`
 - You should be ready to go!
-- If you have any question please write to iSA@voices-int.com
-- If you are interested in using iSA technology in an enterprise environment please contact us at info@voices-int.com
+- If you have any question or you are interested in using iSA technology in an enterprise environment, please contact us at iSA@voices-int.com
 
