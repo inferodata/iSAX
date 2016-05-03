@@ -11,5 +11,5 @@ iSA: U.S. provisional patent application No. 62/215264
 - At this point you should have `iSAX` installed and can proceed:
   - `library(iSAX)`
 - You should be ready to go!
-- If you have any question please write to  [mail to:]iSA@voices-int.com
+- If you have any question please write to iSA@voices-int.com
 
