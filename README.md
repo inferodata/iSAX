@@ -1,5 +1,5 @@
 ## iSAX
-iSAX is an R package which provides access to iSA technology developed by VOICES from the Blogs. It is released for academic use only under the "Creative Commons License Attribution-NonCommercial-NoDerivatives 4.0 International" (CC BY-NC-ND 4.0). 
+iSAX is an R package which provides access to iSA technology developed by VOICES from the Blogs. It is released for academic use only under the "Creative Commons License Attribution-NonCommercial-NoDerivatives 4.0 International" (CC BY-NC-ND 4.0). See https://creativecommons.org/licenses/by-nc-nd/4.0/
 
 ## Warning:
 Commercial use of iSA is protected under the U.S. provisional patent application No. 62/215264
