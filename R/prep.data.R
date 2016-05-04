@@ -6,7 +6,7 @@
 # Warning: Commercial use of iSA is protected under the U.S. provisional patent application No. 62/215264
 #########################################################################################################
 
-prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
+prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     use.all=TRUE, shannon=FALSE, verbose=FALSE,
     stripWhite=TRUE, removeNum=TRUE, removePunct=TRUE,
     removeStop=TRUE, toPlain=TRUE, doGC=FALSE){
