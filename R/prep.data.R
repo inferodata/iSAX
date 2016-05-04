@@ -17,10 +17,10 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     CN <- lang == "chinese"
     
     if(JP){
-        require(RMeCab)
+        #require(RMeCab)
         if(verbose)
         cat("Phase1: Japanese tokenization...")
-        tkz <- function(x) iconv(paste(RMeCabC(x$content),collapse=" "),"UTF-8", sub="byte")
+        tkz <- function(x) iconv(paste(RMeCab::RMeCabC(x$content),collapse=" "),"UTF-8", sub="byte")
         
         corpus <- tm_map(corpus, tkz)
             if(stripWhite){
@@ -47,9 +47,9 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     }
     
     if(CN){
-        library(rmmseg4j)
+        #        library(rmmseg4j)
         if(verbose) cat("Phase1: Chinese tokenization...")
-        tkz <- function(x)  {y <- mmseg4j(x$content); Encoding(y) <- "UTF-8"; y
+        tkz <- function(x)  {y <- rmmseg4j::mmseg4j(x$content); Encoding(y) <- "UTF-8"; y
         }
         tmp <- lapply(corpus, tkz)
         corpus <- VCorpus(VectorSource(tmp),readerControl=list(language="zh"))
@@ -77,7 +77,7 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     }
     
     if(!CN & !JP){
-        if(verbose) cat("Phase1: Cleaning up...")
+        if(verbose) cat("\nPhase1: Cleaning up...")
         tl <- function(x)  iconv(x$content,"UTF-8", sub="byte")
         tmp <- lapply(corpus, tl)
         corpus <- VCorpus(VectorSource(tmp))
@@ -91,22 +91,23 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
         #    corpus <- tm_map(corpus, removeWords, stopwords("italian"))
         #}
         
-        if(toPlain){
-            if(verbose) cat("sanitizing corpus...")
-            corpus <- tm_map(corpus, PlainTextDocument)
-        }
+        # if(toPlain){
+        #    if(verbose) cat("sanitizing corpus...")
+        #    corpus <- tm_map(corpus, PlainTextDocument)
+        #}
     }
-    if(verbose) cat("Phase2: stemming...")
     if(!JP)
-    gc(doGC,doGC)
+     gc(doGC,doGC)
     
     if(CN | JP){
+        if(verbose) cat("\nPhase2: stemming...")
         dtm <- DocumentTermMatrix(corpus, control=list(tolower=FALSE))
     } else {
         if(stripWhite){
-            if(verbose) cat("strip white spaces...")
+            if(verbose) cat("\nstripping white spaces...")
             corpus <- tm_map(corpus, stripWhitespace)
         }
+        if(verbose) cat("\nPhase2: stemming...")
         dtm <- DocumentTermMatrix(corpus, control=list(mc.cores=mc,
         removePunctuation=removePunct, stopwords=removeStop, removeNumbers=removeNum, tolower=TRUE, stemming=TRUE, 
           weighting=weightBin, language=lang))
@@ -146,7 +147,7 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
         dtm3.full <- dtm3.full[, idx]
     }
     dtm3.full[dtm3.full>1] <- 1
-    if(verbose) cat("Phase3: bin2hexing...")
+    if(verbose) cat("\nPhase3: bin2hexing...")
     
     S <- apply(dtm3.full, 1, bin2hex)
     
