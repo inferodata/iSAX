@@ -9,7 +9,7 @@ Commercial use of iSA is protected under the U.S. provisional patent application
 - Make sure to start a fresh R session an type:
   - `library(devtools)`
   - `install_github("blogsvoices/iSAX")`
-- At this point you should have `iSAX` installed and can proceed:
+- At this point you should have `iSAX` installed and can proceed with:
   - `library(iSAX)`
 - You should be ready to go!
 - If you have any question or you are interested in using iSA technology in an enterprise environment, please contact us at iSA@voices-int.com
