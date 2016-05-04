@@ -1,5 +1,5 @@
 ## iSAX
-iSAX is an R package which provides access to iSA technology developed by VOICES from the Blogs. It is released for academic use only and <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a> (CC BY-NC-ND 4.0).
+iSAX is an R package which provides access to iSA technology developed by VOICES from the Blogs. It is released for academic use only and licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a> (CC BY-NC-ND 4.0).
 
 
 ## Warning:
