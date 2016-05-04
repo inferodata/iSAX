@@ -3,10 +3,10 @@
 \title{Prepares data for iSA algorithm}
 \description{Prepares data for iSA algorithm. This is a pre-processing step which performs stemming and other cleaning steps.}
 \usage{
-prep.data(corpus, th = 0.99, lang = "italian", train = NULL,
-          use.all = TRUE, shannon = FALSE, verbose=FALSE,
+prep.data(corpus, th=0.99, lang="english", train=NULL,
+          use.all=TRUE, shannon=FALSE, verbose=FALSE,
           stripWhite=TRUE, removeNum=TRUE, removePunct=TRUE,
-          removeStop=TRUE, toPlain=TRUE, doGC=TRUE)
+          removeStop=TRUE, toPlain=TRUE, doGC=FALSE)
 }
 \arguments{
     \item{corpus}{a corpus from the \code{tm} package}
@@ -20,7 +20,7 @@ prep.data(corpus, th = 0.99, lang = "italian", train = NULL,
     \item{removePunct}{removePunct? if not JP or CN always TRUE}
     \item{removeStop}{removeStop? if not JP or CN always TRUE}
     \item{toPlain}{convert to plain text internally? if not JP or CN always TRUE}
-    \item{doGC}{perform garbage collection?}
+    \item{doGC}{perform garbage collection? Better TRUE for large corpus}
     \item{verbose}{should show all steps?}
 }
 \details{This function requires \code{tm} package to performs stemming.}
