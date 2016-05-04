@@ -9,10 +9,7 @@
 prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
     use.all=TRUE, shannon=FALSE, verbose=FALSE,
     stripWhite=TRUE, removeNum=TRUE, removePunct=TRUE,
-    removeStop=TRUE, toPlain=TRUE, doGC=TRUE){
-        #require(tm)
-    #    require(BMS)
-    #require(parallel)
+    removeStop=TRUE, toPlain=TRUE, doGC=FALSE){
     mc <- min(2, as.integer(detectCores()/2))
     options(mc.cores = mc)
     
@@ -23,21 +20,9 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
         require(RMeCab)
         if(verbose)
         cat("Phase1: Japanese tokenization...")
-        #gc(TRUE,TRUE)
-        #     tkz <- function(x) paste(RMeCabC(x$content),collapse=" ")
         tkz <- function(x) iconv(paste(RMeCabC(x$content),collapse=" "),"UTF-8", sub="byte")
-        old <- FALSE
-        if(old){
-            tmp <- lapply(corpus, tkz)
-            corpus <- VCorpus(VectorSource(tmp))#,readerControl=list(language="ja"))
-            corpus <- tm_map(corpus, stripWhitespace)
-            corpus <- tm_map(corpus, removeNumbers)
-            corpus <- tm_map(corpus, removePunctuation)
-            #  corpus <- VCorpus(VectorSource(tmp),readerControl=list(language="ja"))
-            rm(tmp)
-            corpus <- tm_map(corpus, removeWords, stopwords("english"))
-        } else {
-            corpus <- tm_map(corpus, tkz)
+        
+        corpus <- tm_map(corpus, tkz)
             if(stripWhite){
                 if(verbose) cat("strip white...")
                 corpus <- tm_map(corpus, stripWhitespace)
@@ -58,13 +43,12 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
                 if(verbose) cat("sanitizing corpus...")
                 corpus <- tm_map(corpus, PlainTextDocument)
             }
-        }
+        
     }
     
     if(CN){
         library(rmmseg4j)
         if(verbose) cat("Phase1: Chinese tokenization...")
-        #     tkz <- function(x) enc2utf8(mmseg4j(x$content))
         tkz <- function(x)  {y <- mmseg4j(x$content); Encoding(y) <- "UTF-8"; y
         }
         tmp <- lapply(corpus, tkz)
@@ -95,32 +79,18 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
     if(!CN & !JP){
         if(verbose) cat("Phase1: Cleaning up...")
         tl <- function(x)  iconv(x$content,"UTF-8", sub="byte")
-        #tl <- function(x)  tolower(iconv(x$content,"UTF-8", sub="byte"))
         tmp <- lapply(corpus, tl)
         corpus <- VCorpus(VectorSource(tmp))
         rm(tmp)
-        # corpus <- tm_map(corpus, content_transformer(tolower))
-        if(stripWhite){
-            if(verbose) cat("strip white...")
-            corpus <- tm_map(corpus, stripWhitespace)
-        }
-        if(removeNum){
-            if(verbose) cat("remove numbers...")
-            corpus <- tm_map(corpus, removeNumbers)
-        }
-        if(removePunct){
-            if(verbose) cat("remove punctuation...")
-            corpus <- tm_map(corpus, removePunctuation)
-        }
-        if(removeStop){
-            if(verbose) cat("remove English stopwords...")
-            corpus <- tm_map(corpus, removeWords, stopwords("english"))
-            if(verbose) cat("remove Italian stopwords...")
-            corpus <- tm_map(corpus, removeWords, stopwords("italian"))
-        }
-        # cat("pre-stemming...")
-        # corpus <- tm_map(corpus, stemDocument, language = lang)
-        #    corpus <- tm_map(corpus, stemDocument, language = "italian")
+        
+        
+        #if(removeStop){
+        #    if(verbose) cat("remove English stopwords...")
+        #    corpus <- tm_map(corpus, removeWords, stopwords("english"))
+        #    if(verbose) cat("remove Italian stopwords...")
+        #    corpus <- tm_map(corpus, removeWords, stopwords("italian"))
+        #}
+        
         if(toPlain){
             if(verbose) cat("sanitizing corpus...")
             corpus <- tm_map(corpus, PlainTextDocument)
@@ -133,8 +103,13 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
     if(CN | JP){
         dtm <- DocumentTermMatrix(corpus, control=list(tolower=FALSE))
     } else {
+        if(stripWhite){
+            if(verbose) cat("strip white spaces...")
+            corpus <- tm_map(corpus, stripWhitespace)
+        }
         dtm <- DocumentTermMatrix(corpus, control=list(mc.cores=mc,
-        removePunctuation=TRUE, removeWords=TRUE, removeNumbers=TRUE, tolower=TRUE, stemming=TRUE, weighting=weightBin, language=lang))
+        removePunctuation=removePunct, stopwords=removeStop, removeNumbers=removeNum, tolower=TRUE, stemming=TRUE, 
+          weighting=weightBin, language=lang))
     }
     rm(corpus)
     if(!JP)
@@ -155,14 +130,9 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
     
     
     if(shannon){
-        #print("shannon")
-        #print(dim(dtm))
         dtm1 <- removeSparseTerms(dtm, th)
         sh <-  apply(dtm1, 2, entropy)
-        # plot(sh, prop.table(colSums(dtm1)))
-        #print(length(sh))
         idx <- which(sh>quantile(sh,pr=th, na.rm=TRUE))
-        #print(length(idx))
         dtm2.full  <- dtm1[,idx]
         dtm3.full <- as.matrix(dtm2.full)
     } else {
@@ -178,7 +148,6 @@ prep.data <- function(corpus, th=0.99, lang="italian", train=NULL,
     dtm3.full[dtm3.full>1] <- 1
     if(verbose) cat("Phase3: bin2hexing...")
     
-    #S <- apply(dtm3.full, 1, function(x) paste(x, collapse=""))
     S <- apply(dtm3.full, 1, bin2hex)
     
     return(list(S=S, dtm=dtm3.full, train=train, th=th))
