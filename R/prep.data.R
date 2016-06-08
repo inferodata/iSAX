@@ -12,7 +12,13 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     removeStop=TRUE, toPlain=TRUE, doGC=FALSE){
     mc <- min(2, as.integer(detectCores()/2))
     options(mc.cores = mc)
+    data(ltab)
     
+    lang <- ltab$lang[ltab$code==lang]
+    
+    if(length(lang)==0)
+     lang <- "english"
+
     JP <- lang == "japanese"
     CN <- lang == "chinese"
     

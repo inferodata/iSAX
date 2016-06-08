@@ -2,3 +2,4 @@ mov.test: mov.test
 mov.train: mov.train
 invalsi: invalsi
 expo: expo
+ltab: ltab
