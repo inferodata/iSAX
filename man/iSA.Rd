@@ -31,6 +31,7 @@ Prediction is implemented but only beta. Use it at your own risk.
 }
 \references{
 Iacus, S.M., Curini, L., Ceron, A. (2015) iSA (U.S. provisional patent application No. 62/215264)
+Ceron, A., Curini, L., Iacus, S.M. (2016) iSA: A fast, scalable and accurate algorithm for sentiment analysis of social media content, Information Sciences, V. 367-368, p. 105-124.
 }
 \author{Stefano M. Iacus}
 \seealso{\code{\link{prep.data}}}

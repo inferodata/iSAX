@@ -14,8 +14,10 @@ prep.data <- function(corpus, th=0.99, lang="english", train=NULL,
     options(mc.cores = mc)
     data(ltab)
     
-    lang <- ltab$lang[ltab$code==lang]
-    
+    if(!(lang %in% ltab$lang))
+        lang <- ltab$lang[ltab$code==lang]
+ 
+ 
     if(length(lang)==0)
      lang <- "english"
 
