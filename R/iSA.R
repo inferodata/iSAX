@@ -120,7 +120,8 @@ function(Strain, Stest, Dtrain, nboot=1000, predict=FALSE, ret.boot=FALSE, seqle
     ubd <- rep(1, q)
     const <- 1
     bvec <- c(const, lbd[ind[, 1] == 1], -ubd[ind[, 1] == 1])
-    
+    if(det(t(P)%*% P)< 1e-7) stop("Matrix not invertible")
+
     aa <- try(solve.QP(t(P)%*% P, t(pS) %*% P, Amat,bvec, meq = 1), TRUE)
     if(class(aa) == "try-error"){
         b <- rep(NA, q0)
