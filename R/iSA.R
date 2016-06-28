@@ -123,7 +123,7 @@ function(Strain, Stest, Dtrain, nboot=1000, predict=FALSE, ret.boot=FALSE, seqle
     bvec <- c(const, lbd[ind[, 1] == 1], -ubd[ind[, 1] == 1])
     adetP <- abs(det(t(P)%*% P))
     if(verbose)
-      cat(sprintf("\nNote: abs(det(P'*P))=%f\n", adetP))
+     cat(sprintf("\nNote: abs(det(P'*P))=%g\n", adetP))
     if(adetP < tolerance)
       stop("Matrix P'*P is not invertible")
 
