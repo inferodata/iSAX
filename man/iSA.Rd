@@ -5,7 +5,8 @@
 This function implements the iSA - integrated Sentiment Analysis algorihtm}
 \usage{
 iSA(Strain, Stest, Dtrain, nboot = 1000, predict = FALSE,
-    ret.boot = FALSE, seqlen = 5, sparse = FALSE, verbose = TRUE)
+    ret.boot = FALSE, seqlen = 5, sparse = FALSE,
+    verbose = TRUE, tolerance=Inf)
 }
 \arguments{
   \item{Strain}{a vector of stem strings belonging to the training set}
@@ -17,6 +18,7 @@ iSA(Strain, Stest, Dtrain, nboot = 1000, predict = FALSE,
   \item{seqlen}{length of substrings used in iSA}
   \item{sparse}{use sparse matrix to store data?}
   \item{verbose}{show all steps?}
+\item{tolerance}{threshold for numerical determinant. Defaut = \code{0} means ignore it.}
 }
 \details{
 Prediction is implemented but only beta. Use it at your own risk.
