@@ -22,3 +22,7 @@ Commercial use of iSA is protected under the U.S. provisional patent application
 - If you plan to use Japanese language, you'll also need RMeCab package (painful in many systems)
 - If you have any question or you are interested in using iSA technology in an enterprise environment, please contact us at iSA@voices-int.com
 
+If rJava fails on OSX, please try to run on the Terminal window after installing the latest version of Java and reinstalling rJava package:
+
+sudo R CMD javareconf
+
