@@ -13,7 +13,6 @@ iSAX is an R package which provides access to iSA algorithm technology presented
 - You should be ready to go!
 - If you plan to use Chinese language, you'll also need the rmmseg4j package (easy)
 - If you plan to use Japanese language, you'll also need RMeCab package (painful in many systems)
-- If you have any question or you are interested in using iSA technology in an enterprise environment, please contact us at iSA@voices-int.com
 
 If rJava fails on OSX, please try to run on the Terminal window after installing the latest version of Java and reinstalling rJava package:
 
