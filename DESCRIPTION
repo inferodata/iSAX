@@ -1,6 +1,6 @@
 Package: iSAX
 Type: Package
-Title: This Package Implements iSA Algorithm
+Title: This Package Implements iSA Algorithm *
 Version: 1.0.5
 Author: Stefano M. Iacus
 Maintainer: Stefano M. Iacus <stefano.iacus@unimi.it>
